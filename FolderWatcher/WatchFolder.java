@@ -90,6 +90,7 @@ public class WatchFolder {
             panel.setLayout(layout);
 
             chooseFolderButton.addActionListener(e -> {
+                chooseFolderButton.setFocusable(false);
                 frame.getContentPane().add(panel, BorderLayout.CENTER);
                 JFileChooser fileChooser = new JFileChooser();
                 fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -105,6 +106,7 @@ public class WatchFolder {
             });
 
             startButton.addActionListener(e -> {
+                startButton.setFocusable(false);
                 if (watch.pathToWatch.length() > 0) {
                     watch.startToWatch(watch.pathToWatch);
                 }
@@ -113,6 +115,7 @@ public class WatchFolder {
             stopButton.setBounds(50, 400, 100, 40);
             frame.add(stopButton);
             stopButton.addActionListener(e -> {
+                stopButton.setFocusable(false);
                 System.out.println("Stopping...");
                 pathName.setText("Enter path you want to listen");
                 System.exit(0);

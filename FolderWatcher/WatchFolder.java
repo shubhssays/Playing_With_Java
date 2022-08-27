@@ -8,7 +8,10 @@ import java.nio.file.StandardWatchEventKinds;
 import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
+import java.util.stream.Collectors;
 import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class WatchFolder {
 
@@ -23,13 +26,38 @@ public class WatchFolder {
                     StandardWatchEventKinds.ENTRY_DELETE);
 
             boolean poll = true;
+            WatchFolder wf = new WatchFolder();
             while (poll) {
                 WatchKey key = watchService.take();
                 for (WatchEvent<?> event : key.pollEvents()) {
                     System.out.println("Event kind : " + event.kind() + " - File : " + event.context());
+                    wf.apiCall("http://localhost:3000");
                 }
                 poll = key.reset();
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void apiCall(String URL) {
+        try {
+            URL url = new URL(URL);
+
+            // Open a connection(?) on the URL(??) and cast the response(???)
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+            // Now it's "open", we can set the request method, headers etc.
+            connection.setRequestProperty("accept", "application/json");
+
+            // This line makes the request
+            InputStream responseStream = connection.getInputStream();
+
+            String result = new BufferedReader(new InputStreamReader(responseStream))
+            .lines().collect(Collectors.joining("\n"));
+
+            // Finally we have the response
+            System.out.println("API RESPONSE ==> " + result);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -89,8 +117,6 @@ public class WatchFolder {
                 pathName.setText("Enter path you want to listen");
                 System.exit(0);
             });
-
-           
 
             frame.setSize(300, 500);
             frame.setLayout(null);

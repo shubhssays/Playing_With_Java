@@ -12,9 +12,11 @@ import java.io.*;
 
 public class WatchFolder {
 
+    String pathToWatch = "";
+
     public void startToWatch(String folderToWatch) {
         try {
-            System.out.print("Watching :::>>>>> " + folderToWatch);
+            System.out.println("Watching Now... " + folderToWatch);
             WatchService watchService = FileSystems.getDefault().newWatchService();
             Path path = Paths.get(folderToWatch);
             path.register(watchService, StandardWatchEventKinds.ENTRY_CREATE, StandardWatchEventKinds.ENTRY_MODIFY,
@@ -35,67 +37,67 @@ public class WatchFolder {
 
     public static void main(String[] args) {
         try {
-            JFrame frame = new JFrame("Watch For Folder");// creating instance of JFrame
+            WatchFolder watch = new WatchFolder();
+            JFrame frame = new JFrame("Watch For Folder");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setBackground(Color.MAGENTA);
             JLabel pathName;
             pathName = new JLabel("Enter path you want to listen", JLabel.CENTER);
-            pathName.setBounds(50, 50, 200, 30);
+            pathName.setBounds(50, 50, 300, 30);
             pathName.setForeground(Color.BLUE);
 
             frame.add(pathName);
 
-            JButton stopButton = new JButton("Stop");// creating instance of JButton
-            JButton startButton = new JButton("Start");// creating instance of JButton
-            startButton.setBounds(50, 300, 100, 40);// x axis, y axis, width, height
+            JButton chooseFolderButton = new JButton("Choose Folder");
+            chooseFolderButton.setBounds(50, 200, 200, 40);
+            frame.add(chooseFolderButton);
+
+            JButton stopButton = new JButton("Stop");
+            JButton startButton = new JButton("Start");
+            startButton.setBounds(50, 300, 100, 40);
             frame.add(startButton);// adding button in JFrame
 
             JPanel panel = new JPanel();
             LayoutManager layout = new FlowLayout();
             panel.setLayout(layout);
 
-            startButton.addActionListener(e -> {
-                String pathToWatch = "";
+            chooseFolderButton.addActionListener(e -> {
                 frame.getContentPane().add(panel, BorderLayout.CENTER);
-
                 JFileChooser fileChooser = new JFileChooser();
                 fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
                 int option = fileChooser.showOpenDialog(frame);
                 if (option == JFileChooser.APPROVE_OPTION) {
                     File file = fileChooser.getSelectedFile();
-                    pathToWatch = file.getAbsolutePath();
-                    pathName.setText("Folder Selected: " + pathToWatch);
-                    System.out.println("Watching Now... " + pathToWatch);
-                    startButton.setEnabled(false);
-                    stopButton.setEnabled(true);
-
-                    WatchFolder watch = new WatchFolder();
-                    watch.startToWatch(pathToWatch);
+                    watch.pathToWatch = file.getAbsolutePath();
+                    pathName.setText("Folder Selected: " + file.getName());
                 } else {
+                    watch.pathToWatch = "";
                     System.out.println("Open command canceled");
                 }
             });
 
-            stopButton.setBounds(50, 400, 100, 40);// x axis, y axis, width, height
-            stopButton.setEnabled(false);
+            startButton.addActionListener(e -> {
+                if (watch.pathToWatch.length() > 0) {
+                    watch.startToWatch(watch.pathToWatch);
+                }
+            });
 
+            stopButton.setBounds(50, 400, 100, 40);
+            frame.add(stopButton);
             stopButton.addActionListener(e -> {
-                stopButton.setEnabled(false);
-                startButton.setEnabled(true);
                 System.out.println("Stopping...");
                 pathName.setText("Enter path you want to listen");
                 System.exit(0);
             });
 
-            frame.add(stopButton);// adding button in JFrame
+           
 
-            frame.setSize(300, 500);// 400 width and 500 height
-            frame.setLayout(null);// using no layout managers
-            frame.setVisible(true);// making the frame visible
+            frame.setSize(300, 500);
+            frame.setLayout(null);
+            frame.setVisible(true);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        
     }
 }

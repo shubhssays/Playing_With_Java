@@ -1,5 +1,5 @@
 import javax.swing.*;
-import java.awt.Color;
+import java.awt.*;
 
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
@@ -8,18 +8,11 @@ import java.nio.file.StandardWatchEventKinds;
 import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
-import java.util.Scanner;
-
+import java.io.*;
 class watcher {
-    // String folderToWatch = "E:/Workspace/Java/WatchMe";
 
     public void init(String folderToWatch) {
         try {
-            // Scanner sc = new Scanner(System.in);
-            // System.out.print("Enter the path you wanna listen");
-            // folderToWatch = sc.nextLine();
-            // System.out.print("Path to listen :::>>>>> " + folderToWatch);
-
             System.out.print("Watching :::>>>>> " + folderToWatch);
             WatchService watchService = FileSystems.getDefault().newWatchService();
             Path path = Paths.get(folderToWatch);
@@ -40,53 +33,47 @@ class watcher {
     }
 }
 
-public class First {
+public class WatchFolder {
     public static void main(String[] args) {
         try {
-            JFrame f = new JFrame("Watch For Folder");// creating instance of JFrame
-            f.setBackground(Color.MAGENTA);
-            JTextField inputPath;
+            JFrame frame = new JFrame("Watch For Folder");// creating instance of JFrame
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setBackground(Color.MAGENTA);
             JLabel pathName;
-            JLabel errorMessage;
             pathName = new JLabel("Enter path you want to listen", JLabel.CENTER);
-            errorMessage = new JLabel("Path Cannot Be Empty", JLabel.CENTER);
             pathName.setBounds(50, 50, 200, 30);
             pathName.setForeground(Color.BLUE);
-            errorMessage.setBounds(50, 150, 200, 30);
-            errorMessage.setForeground(Color.RED);
-            errorMessage.setVisible(false);
 
-            f.add(pathName);
-            f.add(errorMessage);
-
-            inputPath = new JTextField("", JLabel.CENTER);
-            inputPath.setBounds(50, 100, 200, 30);
-            f.add(inputPath);
+            frame.add(pathName);
 
             JButton stopButton = new JButton("Stop");// creating instance of JButton
             JButton startButton = new JButton("Start");// creating instance of JButton
             startButton.setBounds(50, 300, 100, 40);// x axis, y axis, width, height
-            f.add(startButton);// adding button in JFrame
+            frame.add(startButton);// adding button in JFrame
+
+            JPanel panel = new JPanel();
+            LayoutManager layout = new FlowLayout();
+            panel.setLayout(layout);
 
             startButton.addActionListener(e -> {
-                String pathToWatch = inputPath.getText();
-                if (pathToWatch.length() == 0) {
-                    errorMessage.setVisible(true);
-                    pathName.setVisible(false);
-                    try {
-                        Thread.sleep(2000);
-                    } catch (Exception e1) {
-                        e1.printStackTrace();
-                    }
-                    errorMessage.setVisible(false);
-                    pathName.setVisible(true);
-                } else {
+                String pathToWatch = "";
+                frame.getContentPane().add(panel, BorderLayout.CENTER);
+
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                int option = fileChooser.showOpenDialog(frame);
+                if (option == JFileChooser.APPROVE_OPTION) {
+                    File file = fileChooser.getSelectedFile();
+                    pathToWatch = file.getAbsolutePath();
+                    pathName.setText("Folder Selected: " + pathToWatch);
                     System.out.println("Watching Now... " + pathToWatch);
                     startButton.setEnabled(false);
                     stopButton.setEnabled(true);
 
                     watcher watch = new watcher();
                     watch.init(pathToWatch);
+                } else {
+                    System.out.println("Open command canceled");
                 }
             });
 
@@ -97,14 +84,15 @@ public class First {
                 stopButton.setEnabled(false);
                 startButton.setEnabled(true);
                 System.out.println("Stopping...");
+                pathName.setText("Enter path you want to listen");
                 System.exit(0);
             });
 
-            f.add(stopButton);// adding button in JFrame
+            frame.add(stopButton);// adding button in JFrame
 
-            f.setSize(300, 500);// 400 width and 500 height
-            f.setLayout(null);// using no layout managers
-            f.setVisible(true);// making the frame visible
+            frame.setSize(300, 500);// 400 width and 500 height
+            frame.setLayout(null);// using no layout managers
+            frame.setVisible(true);// making the frame visible
         } catch (Exception e) {
             e.printStackTrace();
         }

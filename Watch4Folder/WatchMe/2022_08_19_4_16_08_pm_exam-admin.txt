@@ -1,0 +1,47 @@
+
+ 
+ 2022-08-19 4:16:08 pm: 
+ /exam-admin/subject-faculty-updates  
+ {"subject_mapp":{"add":{"subject_id":"4","faculty_id":["32200964","32201115"]},"remove":{"subject_id":"4","faculty_id":["shubhs_EXAM_ADMIN","32200458","32201287","32200864","32201150","32200108","32200236","10220020","40000107","01220304","10220023","32200872","32201216","32200922","32201256","32201228","32200473","32200299","32206578"]}},"_user":{"username":"shubhs_EXAM_ADMIN","firstname":"Shubham","lastname":"Shukla","email":"shubhs@gmail.com","campus_name":["SCHOOL OF COMMERCE (BENGALURU)","SCHOOL OF COMMERCE (DHULE)","SCHOOL OF COMMERCE (INDORE)","SCHOOL OF COMMERCE (MUMBAI)","SCHOOL OF COMMERCE (NAVI MUMBAI)"],"role":["role_dean","role_exam_admin","role_super_admin","role_template_author","role_template_creator","role_template_reviewer"]}}  
+ {}  
+ {} 
+ error: duplicate key value violates unique constraint "subject_faculty_mapping_pkey"
+    at Parser.parseErrorMessage (E:\Workspace\Github\QuestionBank_v2\node_modules\pg-protocol\dist\parser.js:287:98)
+    at Parser.handlePacket (E:\Workspace\Github\QuestionBank_v2\node_modules\pg-protocol\dist\parser.js:126:29)
+    at Parser.parse (E:\Workspace\Github\QuestionBank_v2\node_modules\pg-protocol\dist\parser.js:39:38)
+    at Socket.<anonymous> (E:\Workspace\Github\QuestionBank_v2\node_modules\pg-protocol\dist\index.js:11:42)
+    at Socket.emit (node:events:513:28)
+    at addChunk (node:internal/streams/readable:315:12)
+    at readableAddChunk (node:internal/streams/readable:289:9)
+    at Socket.Readable.push (node:internal/streams/readable:228:10)
+    at TCP.onStreamRead (node:internal/stream_base_commons:190:23)
+
+ 
+ 2022-08-19 4:16:22 pm:
+ {"subject_mapp":{"add":{"subject_id":"4","faculty_id":["32200458","32200864"]},"remove":{"subject_id":"4","faculty_id":["shubhs_EXAM_ADMIN","32200964","32201287","32201115","32201150","32200108","32200236","10220020","40000107","01220304","10220023","32200872","32201216","32200922","32201256","32201228","32200473","32200299","32206578"]}},"_user":{"username":"shubhs_EXAM_ADMIN","firstname":"Shubham","lastname":"Shukla","email":"shubhs@gmail.com","campus_name":["SCHOOL OF COMMERCE (BENGALURU)","SCHOOL OF COMMERCE (DHULE)","SCHOOL OF COMMERCE (INDORE)","SCHOOL OF COMMERCE (MUMBAI)","SCHOOL OF COMMERCE (NAVI MUMBAI)"],"role":["role_dean","role_exam_admin","role_super_admin","role_template_author","role_template_creator","role_template_reviewer"]}} 
+  /exam-admin/subject-faculty-updates 
+ error: duplicate key value violates unique constraint "subject_faculty_mapping_pkey"
+    at Parser.parseErrorMessage (E:\Workspace\Github\QuestionBank_v2\node_modules\pg-protocol\dist\parser.js:287:98)
+    at Parser.handlePacket (E:\Workspace\Github\QuestionBank_v2\node_modules\pg-protocol\dist\parser.js:126:29)
+    at Parser.parse (E:\Workspace\Github\QuestionBank_v2\node_modules\pg-protocol\dist\parser.js:39:38)
+    at Socket.<anonymous> (E:\Workspace\Github\QuestionBank_v2\node_modules\pg-protocol\dist\index.js:11:42)
+    at Socket.emit (node:events:513:28)
+    at addChunk (node:internal/streams/readable:315:12)
+    at readableAddChunk (node:internal/streams/readable:289:9)
+    at Socket.Readable.push (node:internal/streams/readable:228:10)
+    at TCP.onStreamRead (node:internal/stream_base_commons:190:23)
+
+ 
+ 2022-08-19 4:17:50 pm:
+ {"subject_mapp":{"add":{"subject_id":"4","faculty_id":["32200458","32201287"]},"remove":{"subject_id":"4","faculty_id":["shubhs_EXAM_ADMIN","32200964","32200864","32201115","32201150","32200108","32200236","10220020","40000107","01220304","10220023","32200872","32201216","32200922","32201256","32201228","32200473","32200299","32206578"]}},"_user":{"username":"shubhs_EXAM_ADMIN","firstname":"Shubham","lastname":"Shukla","email":"shubhs@gmail.com","campus_name":["SCHOOL OF COMMERCE (BENGALURU)","SCHOOL OF COMMERCE (DHULE)","SCHOOL OF COMMERCE (INDORE)","SCHOOL OF COMMERCE (MUMBAI)","SCHOOL OF COMMERCE (NAVI MUMBAI)"],"role":["role_dean","role_exam_admin","role_super_admin","role_template_author","role_template_creator","role_template_reviewer"]}} 
+  /exam-admin/subject-faculty-updates 
+ error: duplicate key value violates unique constraint "subject_faculty_mapping_pkey"
+    at Parser.parseErrorMessage (E:\Workspace\Github\QuestionBank_v2\node_modules\pg-protocol\dist\parser.js:287:98)
+    at Parser.handlePacket (E:\Workspace\Github\QuestionBank_v2\node_modules\pg-protocol\dist\parser.js:126:29)
+    at Parser.parse (E:\Workspace\Github\QuestionBank_v2\node_modules\pg-protocol\dist\parser.js:39:38)
+    at Socket.<anonymous> (E:\Workspace\Github\QuestionBank_v2\node_modules\pg-protocol\dist\index.js:11:42)
+    at Socket.emit (node:events:513:28)
+    at addChunk (node:internal/streams/readable:315:12)
+    at readableAddChunk (node:internal/streams/readable:289:9)
+    at Socket.Readable.push (node:internal/streams/readable:228:10)
+    at TCP.onStreamRead (node:internal/stream_base_commons:190:23)

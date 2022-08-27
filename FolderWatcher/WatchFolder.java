@@ -1,4 +1,3 @@
-package FolderWatcher;
 import javax.swing.*;
 import java.awt.*;
 
@@ -10,9 +9,10 @@ import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
 import java.io.*;
-class watcher {
 
-    public void init(String folderToWatch) {
+public class WatchFolder {
+
+    public void startToWatch(String folderToWatch) {
         try {
             System.out.print("Watching :::>>>>> " + folderToWatch);
             WatchService watchService = FileSystems.getDefault().newWatchService();
@@ -32,9 +32,7 @@ class watcher {
             e.printStackTrace();
         }
     }
-}
 
-public class WatchFolder {
     public static void main(String[] args) {
         try {
             JFrame frame = new JFrame("Watch For Folder");// creating instance of JFrame
@@ -71,8 +69,8 @@ public class WatchFolder {
                     startButton.setEnabled(false);
                     stopButton.setEnabled(true);
 
-                    watcher watch = new watcher();
-                    watch.init(pathToWatch);
+                    WatchFolder watch = new WatchFolder();
+                    watch.startToWatch(pathToWatch);
                 } else {
                     System.out.println("Open command canceled");
                 }
@@ -97,5 +95,7 @@ public class WatchFolder {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        
     }
 }

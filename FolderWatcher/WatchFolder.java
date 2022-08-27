@@ -1,3 +1,4 @@
+package FolderWatcher;
 import javax.swing.*;
 import java.awt.*;
 
